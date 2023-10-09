@@ -1,14 +1,15 @@
-nr = int(input("Number: "))
-copy_nr = nr
+def is_palindrome(number):
+    copy_nr = number
+    rev = 0
+    while copy_nr > 0:
+        rev = rev * 10 + copy_nr % 10
+        copy_nr = int(copy_nr / 10)
 
-rev = 0
+    if rev == number:
+        return True
+    else:
+        return False
 
-while nr > 0:
-    rev = rev * 10 + nr % 10
-    nr = int(nr / 10)
 
-if rev == copy_nr:
-    print(True)
-else:
-    print(False)
-    
+nr = int(input("Number is: "))
+print(is_palindrome(nr))
