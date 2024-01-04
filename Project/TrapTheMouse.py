@@ -14,7 +14,7 @@ def main():
         exit()
 
     my_game = Game()
-    my_game.play(mode)
+    my_game.play_game(mode)
 
     print('Thanks for playing!')
 

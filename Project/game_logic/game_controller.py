@@ -12,18 +12,17 @@ class Game:
         pygame.display.set_caption('Trap the mouse')
         pygame.font.init()
 
-    def play(self, mode):
-        if mode == 'friend':
-            self.play_with_friend()
+    def play_game(self, mode):
 
+        my_ai = None
+        if mode != 'friend':
+            play_with_ai = True
+            my_ai = MiniMax(mode)
         else:
-            minimax = MiniMax(mode)
-            self.play_with_ai(minimax)
+            play_with_ai = False
 
-    def play_with_friend(self):
         run = True
         clock = pygame.time.Clock()
-
         end_message = ''
         game_ended = False
         while run:
@@ -34,6 +33,10 @@ class Game:
             elif self.state.losing_state():
                 end_message = 'Mouse loses'
                 game_ended = True
+
+            if not game_ended and play_with_ai and self.state.turn == MOUSE:
+                ai_row, ai_col = my_ai.get_best_move(self.state)
+                self.state.move(ai_row, ai_col)
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -52,9 +55,6 @@ class Game:
             pygame.display.update()
 
         pygame.quit()
-
-    def play_with_ai(self, ai):
-        pass
 
     def print_end_message(self, end_message):
         font = pygame.font.Font(None, 36)
