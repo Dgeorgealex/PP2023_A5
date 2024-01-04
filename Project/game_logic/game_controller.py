@@ -47,18 +47,7 @@ class Game:
             self.state.draw_state(self.window)
 
             if game_ended:
-                font = pygame.font.Font(None, 36)
-                text = font.render(end_message, True, (255, 255, 255))
-                text_rect = text.get_rect(center=(WIDTH // 2, HEIGHT // 2))
-
-                text_surface = pygame.Surface((text_rect.width + 20, text_rect.height + 10))
-                text_surface.fill((0, 0, 0))  # Background color (black)
-
-                text_rect = text.get_rect(center=(text_surface.get_width() // 2, text_surface.get_height() // 2))
-                text_surface.blit(text, text_rect)
-
-                window_rect = text_surface.get_rect(center=(WIDTH // 2, HEIGHT // 2))
-                self.window.blit(text_surface, window_rect)
+                self.print_end_message(end_message)
 
             pygame.display.update()
 
@@ -66,3 +55,17 @@ class Game:
 
     def play_with_ai(self, ai):
         pass
+
+    def print_end_message(self, end_message):
+        font = pygame.font.Font(None, 36)
+        text = font.render(end_message, True, WHITE)
+        text_rect = text.get_rect(center=(WIDTH // 2, HEIGHT // 2))
+
+        text_surface = pygame.Surface((text_rect.width + 20, text_rect.height + 10))
+        text_surface.fill(BLACK)
+
+        text_rect = text.get_rect(center=(text_surface.get_width() // 2, text_surface.get_height() // 2))
+        text_surface.blit(text, text_rect)
+
+        window_rect = text_surface.get_rect(center=(WIDTH // 2, HEIGHT // 2))
+        self.window.blit(text_surface, window_rect)
