@@ -13,9 +13,16 @@ class State:
         self.turn = WALLS
         self.mouse_pos = (5, 5)
 
+    def copy(self):
+        new_instance = State()
+        new_instance.game_matrix = [row[:] for row in self.game_matrix]
+        new_instance.turn = self.turn
+        new_instance.mouse_pos = self.mouse_pos
+        return new_instance
+
     def _init_mouse_and_walls(self):
         self.game_matrix[5][5] = 2
-        nr_walls = np.random.randint(5, 21)
+        nr_walls = np.random.randint(10, 21)
         for _ in range(nr_walls):
             row = np.random.randint(0, ROWS)
             col = np.random.randint(0, COLS)
@@ -89,3 +96,36 @@ class State:
             self.mouse_pos = (row, col)
 
         return True
+
+    def evaluate(self):
+        return 1000 - self.shortest_path()
+
+    def shortest_path(self):
+        q = utils.Queue()
+        q.push(self.mouse_pos)
+        a = [row[:] for row in self.game_matrix]
+        for row in range(ROWS):
+            for col in range(COLS):
+                if a[row][col] == 1:
+                    a[row][col] = -1
+                elif a[row][col] == 2:
+                    a[row][col] = 1
+
+        while not q.is_empty():
+            row, col = q.pop()
+
+            if row % 2 == 1:
+                directions = MOUSE_DIRECTIONS_ODD
+            else:
+                directions = MOUSE_DIRECTIONS_EVEN
+
+            for dx, dy in directions:
+                new_row = row + dx
+                new_col = col + dy
+                if utils.outside_matrix(new_row, new_col):
+                    return a[row][col]
+                elif a[new_row][new_col] == 0:
+                    a[new_row][new_col] = a[row][col] + 1
+                    q.push((new_row, new_col))
+
+        return 1000

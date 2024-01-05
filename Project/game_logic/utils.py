@@ -1,7 +1,7 @@
 import pygame
 from .constants import *
 import math
-
+from collections import deque
 
 def get_hexagon_points(center_x, center_y, side_length):
     hexagon_points = []
@@ -56,3 +56,21 @@ def outside_matrix(row, col):
 
 def on_border_matrix(row, col):
     return row == 0 or col == 0 or row == ROWS-1 or col == COLS-1
+
+
+class Queue:
+    def __init__(self):
+        self.elements = deque()
+
+    def is_empty(self):
+        return len(self.elements) == 0
+
+    def size(self):
+        return len(self.elements)
+
+    def push(self, element):
+        self.elements.append(element)
+
+    def pop(self):
+        return self.elements.popleft()
+
