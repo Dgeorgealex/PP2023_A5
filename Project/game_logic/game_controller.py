@@ -70,3 +70,8 @@ class Game:
 
         window_rect = text_surface.get_rect(center=(WIDTH // 2, HEIGHT // 2))
         self.window.blit(text_surface, window_rect)
+
+        mouse_image = pygame.image.load("assets/img.png")
+
+        mouse_rect = mouse_image.get_rect(center=(WIDTH // 2, HEIGHT // 2 + text_rect.height + 100))
+        self.window.blit(mouse_image, mouse_rect)

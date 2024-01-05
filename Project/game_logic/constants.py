@@ -4,8 +4,8 @@ WALLS = 0
 ROWS = 11
 COLS = 11
 
-WIDTH = 800
-HEIGHT = 800
+WIDTH = 740
+HEIGHT = 650
 
 FPS = 60
 
@@ -16,7 +16,7 @@ ORANGE = (255, 153, 51)
 BROWN = (153, 102, 51)
 
 HEX_LENGTH = 30
-FIRST_HEX = (150, 150)
+FIRST_HEX = (100, 100)
 
 MOUSE_DIRECTIONS_ODD = ((-1, 0), (-1, 1), (0, 1), (1, 1), (1, 0), (0, -1))
 MOUSE_DIRECTIONS_EVEN = ((-1, -1), (-1, 0), (0, 1), (1, 0), (1, -1), (0, -1))
