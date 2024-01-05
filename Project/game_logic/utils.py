@@ -3,6 +3,7 @@ from .constants import *
 import math
 from collections import deque
 
+
 def get_hexagon_points(center_x, center_y, side_length):
     hexagon_points = []
     for i in range(6):

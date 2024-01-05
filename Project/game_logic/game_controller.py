@@ -34,7 +34,7 @@ class Game:
                 end_message = 'Mouse loses'
                 game_ended = True
 
-            if not game_ended and play_with_ai and self.state.turn == MOUSE:
+            if not game_ended and play_with_ai and self.state.turn == WHO_IS_AI:
                 ai_row, ai_col = my_ai.get_best_move(self.state)
                 self.state.move(ai_row, ai_col)
 

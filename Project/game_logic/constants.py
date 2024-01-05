@@ -15,10 +15,12 @@ GREEN = (102, 255, 102)
 ORANGE = (255, 153, 51)
 BROWN = (153, 102, 51)
 
-
-
 HEX_LENGTH = 30
 FIRST_HEX = (150, 150)
 
 MOUSE_DIRECTIONS_ODD = ((-1, 0), (-1, 1), (0, 1), (1, 1), (1, 0), (0, -1))
 MOUSE_DIRECTIONS_EVEN = ((-1, -1), (-1, 0), (0, 1), (1, 0), (1, -1), (0, -1))
+
+COOLING = 0.1
+
+WHO_IS_AI = MOUSE

@@ -22,7 +22,7 @@ class State:
 
     def _init_mouse_and_walls(self):
         self.game_matrix[5][5] = 2
-        nr_walls = np.random.randint(10, 21)
+        nr_walls = np.random.randint(10, 30)
         for _ in range(nr_walls):
             row = np.random.randint(0, ROWS)
             col = np.random.randint(0, COLS)
@@ -98,12 +98,16 @@ class State:
         return True
 
     def evaluate(self):
-        return 1000 - self.shortest_path()
+        if WHO_IS_AI == MOUSE:
+            return self.shortest_path()
+        else:
+            return -self.shortest_path()
 
     def shortest_path(self):
         q = utils.Queue()
         q.push(self.mouse_pos)
         a = [row[:] for row in self.game_matrix]
+
         for row in range(ROWS):
             for col in range(COLS):
                 if a[row][col] == 1:
@@ -123,9 +127,15 @@ class State:
                 new_row = row + dx
                 new_col = col + dy
                 if utils.outside_matrix(new_row, new_col):
-                    return a[row][col]
+                    continue
                 elif a[new_row][new_col] == 0:
                     a[new_row][new_col] = a[row][col] + 1
                     q.push((new_row, new_col))
 
-        return 1000
+        score = 0
+        for row in range(ROWS):
+            for col in range(COLS):
+                if utils.on_border_matrix(row, col) and a[row][col] != 0:
+                    score = score + COOLING ** (a[row][col] - 1)
+
+        return score
