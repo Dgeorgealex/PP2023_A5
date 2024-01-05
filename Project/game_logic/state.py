@@ -22,7 +22,7 @@ class State:
 
     def _init_mouse_and_walls(self):
         self.game_matrix[5][5] = 2
-        nr_walls = np.random.randint(10, 30)
+        nr_walls = np.random.randint(5, 10)
         for _ in range(nr_walls):
             row = np.random.randint(0, ROWS)
             col = np.random.randint(0, COLS)
@@ -47,7 +47,6 @@ class State:
 
     def winning_state(self):
         if self.turn == MOUSE and utils.on_border_matrix(self.mouse_pos[0], self.mouse_pos[1]):
-            self.game_matrix[self.mouse_pos[0]][self.mouse_pos[1]] = 0
             return True
         return False
 
@@ -135,7 +134,10 @@ class State:
         score = 0
         for row in range(ROWS):
             for col in range(COLS):
-                if utils.on_border_matrix(row, col) and a[row][col] != 0:
-                    score = score + COOLING ** (a[row][col] - 1)
+                if utils.on_border_matrix(row, col) and a[row][col] > 0:
+                    if a[row][col] > 10:
+                        score += COOLING ** 10
+                    else:
+                        score = score + COOLING ** (a[row][col] - 1)
 
         return score

@@ -1,16 +1,18 @@
 import random
-
+from game_logic.constants import WHO_IS_AI, MOUSE, WALLS
 INF = 10000000
 
 
 class MiniMax:
     def __init__(self, mode):
         if mode == 'easy':
-            self.depth = 1
-        elif mode == 'normal':
             self.depth = 2
-        else:
+        elif mode == 'normal':
             self.depth = 3
+        else:
+            self.depth = 4
+        if WHO_IS_AI == WALLS:
+            self.depth -= 1
 
     def get_best_move(self, state):
         _, best_move = self.minimax(state, -INF, INF, True, self.depth)
@@ -35,10 +37,10 @@ class MiniMax:
                     best_value = tmp
                     best_move = move
 
-                if best_value > beta:
-                    break
-
                 alfa = max(alfa, best_value)
+
+                if alfa >= beta:
+                    break
 
         else:
             best_value = INF
@@ -52,9 +54,12 @@ class MiniMax:
                     best_value = tmp
                     best_move = move
 
-                if best_value < alfa:
+                beta = min(beta, best_value)
+
+                if alfa >= beta:
                     break
 
-                beta = min(beta, best_value)
+        if depth == self.depth:
+            print(best_value)
 
         return best_value, best_move

@@ -28,6 +28,7 @@ class Game:
         while run:
             clock.tick(FPS)
             if self.state.winning_state():
+                self.state.game_matrix[self.state.mouse_pos[0]][self.state.mouse_pos[1]] = 0
                 end_message = 'Mouse wins'
                 game_ended = True
             elif self.state.losing_state():

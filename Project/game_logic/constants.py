@@ -22,5 +22,6 @@ MOUSE_DIRECTIONS_ODD = ((-1, 0), (-1, 1), (0, 1), (1, 1), (1, 0), (0, -1))
 MOUSE_DIRECTIONS_EVEN = ((-1, -1), (-1, 0), (0, 1), (1, 0), (1, -1), (0, -1))
 
 COOLING = 0.1
+EPS = 0.00000000001
 
 WHO_IS_AI = MOUSE
