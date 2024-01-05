@@ -135,8 +135,8 @@ class State:
         for row in range(ROWS):
             for col in range(COLS):
                 if utils.on_border_matrix(row, col) and a[row][col] > 0:
-                    if a[row][col] > 10:
-                        score += COOLING ** 10
+                    if a[row][col] > 4:
+                        score += COOLING ** 5
                     else:
                         score = score + COOLING ** (a[row][col] - 1)
 
