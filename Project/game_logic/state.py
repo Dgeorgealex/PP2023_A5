@@ -140,4 +140,11 @@ class State:
                     else:
                         score = score + COOLING ** (a[row][col] - 1)
 
+        nr = 0
+        for row in range(ROWS):
+            for col in range(COLS):
+                if a[row][col] > 0:
+                    nr += 1
+        score += nr * (COOLING ** 10)
+
         return score
