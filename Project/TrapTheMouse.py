@@ -1,8 +1,10 @@
 import sys
 from game_logic.game_controller import Game
+import game_logic
 
 
 def main():
+    # help(game_logic)
     game_modes = ['easy', 'normal', 'hard', 'friend']
     if len(sys.argv) != 2:
         print("Invalid arguments")

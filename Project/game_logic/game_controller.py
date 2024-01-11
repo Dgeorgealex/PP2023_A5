@@ -6,13 +6,35 @@ from . import utils
 
 
 class Game:
+    """Class that represents a game
+
+    Attributes:
+        state : State
+            The current state of the game
+        window : pygame.Surface
+            The game window
+
+    Methods:
+        play_game(mode):
+            Main method to play the game, allowing interaction with the AI or a friend.
+
+        print_end_message(end_message):
+            Displays the end message on the screen
+
+    """
     def __init__(self):
+        """Initializes the game class
+        """
         self.state = State()
         self.window = pygame.display.set_mode((WIDTH, HEIGHT))
         pygame.display.set_caption('Trap the mouse')
         pygame.font.init()
 
     def play_game(self, mode):
+        """Main method that contains the game loop and handles input from the user
+        :param mode: str
+            the game mode ('easy', 'normal', 'hard')
+        """
 
         my_ai = None
         if mode != 'friend':
@@ -58,6 +80,10 @@ class Game:
         pygame.quit()
 
     def print_end_message(self, end_message):
+        """Prints the final message on the screen: if the mouse loses or not
+        :param end_message: str
+            The end message that must be printed on the screen
+        """
         font = pygame.font.Font(None, 36)
         text = font.render(end_message, True, WHITE)
         text_rect = text.get_rect(center=(WIDTH // 2, HEIGHT // 2))
